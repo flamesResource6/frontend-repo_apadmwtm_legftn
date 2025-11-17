@@ -1,20 +1,26 @@
 import Spline from '@splinetool/react-spline';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function Hero() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -160]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const blur = useTransform(scrollYProgress, [0, 1], [0, 2]);
+
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden" id="hero">
-      <div className="absolute inset-0">
+    <section ref={ref} className="relative min-h-[100vh] flex items-center overflow-hidden" id="hero">
+      <motion.div className="absolute inset-0" style={{ y, scale, filter: blur.to(v => `blur(${v}px)`) }}>
         <Spline scene="https://prod.spline.design/DtQLjBkD1UpownGS/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-      </div>
+      </motion.div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/40 to-slate-950/90 pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="max-w-2xl"
         >

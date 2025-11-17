@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 const tracks = [
   {
@@ -24,8 +25,12 @@ const tracks = [
 ];
 
 export default function Tracks() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const x = useTransform(scrollYProgress, [0, 1], [80, -80]);
+
   return (
-    <section id="tracks" className="relative py-24">
+    <section ref={ref} id="tracks" className="relative py-28">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/5 to-transparent pointer-events-none" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
@@ -33,7 +38,7 @@ export default function Tracks() {
           <p className="mt-4 text-slate-300/80">Step-by-step learning journeys designed by security engineers.</p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <motion.div style={{ x }} className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
           {tracks.map((t, i) => (
             <motion.div
               key={t.name}
@@ -41,7 +46,7 @@ export default function Tracks() {
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
-              className="relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 p-6"
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 p-6"
             >
               <div className={`absolute -inset-8 bg-gradient-to-br ${t.color} blur-3xl`} />
               <div className="relative">
@@ -53,7 +58,7 @@ export default function Tracks() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

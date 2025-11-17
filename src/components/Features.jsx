@@ -44,11 +44,12 @@ const items = [
 export default function Features() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const y = useTransform(scrollYProgress, [0, 1], [120, -120]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
 
   return (
-    <section ref={ref} id="features" className="relative py-24">
-      <motion.div style={{ y }} className="absolute inset-0 bg-[radial-gradient(80%_40%_at_50%_0%,rgba(16,185,129,0.15),transparent)]" />
+    <section ref={ref} id="features" className="relative py-28">
+      <motion.div style={{ y, rotate }} className="absolute inset-0 bg-[radial-gradient(80%_40%_at_50%_0%,rgba(16,185,129,0.18),transparent)]" />
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
@@ -64,7 +65,7 @@ export default function Features() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: i * 0.06, duration: 0.5 }}
-              className="relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 p-6 hover:bg-slate-900/80 transition-colors"
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/60 p-6 hover:bg-slate-900/80 transition-colors"
             >
               <div className={`absolute -top-10 -right-10 w-40 h-40 rounded-full bg-gradient-to-br ${color} blur-2xl`} />
               <div className="relative">
@@ -73,6 +74,13 @@ export default function Features() {
                 </div>
                 <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
                 <p className="mt-2 text-sm text-slate-300/80">{desc}</p>
+                <motion.div
+                  className="mt-4 h-px bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                  transition={{ duration: 0.6 }}
+                />
               </div>
             </motion.div>
           ))}

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export default function CTA() {
   return (
-    <section id="cta" className="relative py-24">
+    <section id="cta" className="relative py-28">
       <div className="absolute inset-0 bg-[radial-gradient(80%_40%_at_50%_0%,rgba(16,185,129,0.12),transparent)]" />
       <div className="relative mx-auto max-w-4xl px-6 text-center">
         <motion.div
@@ -19,6 +19,15 @@ export default function CTA() {
           </div>
           <p className="mt-4 text-xs text-green-300/80">7‑day free trial • Cancel anytime</p>
         </motion.div>
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute -inset-24 -z-10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2 }}
+          style={{ background: 'conic-gradient(from 0deg, rgba(52,211,153,0.0), rgba(52,211,153,0.2), rgba(59,130,246,0.1), rgba(52,211,153,0.0))', filter: 'blur(80px)' }}
+        />
       </div>
     </section>
   );

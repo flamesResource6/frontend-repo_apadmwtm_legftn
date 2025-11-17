@@ -9,10 +9,14 @@ import CTA from './components/CTA';
 function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-200 selection:bg-emerald-400/30 selection:text-white">
-      {/* global background accents */}
-      <div className="fixed inset-0 -z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_-10%,rgba(16,185,129,0.12),transparent)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(2,6,23,0.6)_10%,rgba(2,6,23,0.9))]" />
+      {/* Global animated ambiance: grid, noise, aurora */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        <div className="absolute inset-0 bg-grid opacity-[0.35]" />
+        <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_-10%,rgba(16,185,129,0.10),transparent)]" />
+        <div className="absolute inset-0 bg-noise" />
+        <div className="absolute inset-0 aurora" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-950 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-slate-950 to-transparent" />
       </div>
 
       <Navbar />

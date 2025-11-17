@@ -10,7 +10,7 @@ export default function Showcase() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
   return (
-    <section id="showcase" className="relative py-24">
+    <section id="showcase" className="relative py-28">
       <motion.div style={{ scaleX }} className="fixed left-0 right-0 top-0 h-1 origin-left bg-gradient-to-r from-emerald-400 to-green-600 z-50" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
@@ -33,6 +33,10 @@ export default function Showcase() {
                 <div className="aspect-video rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 mb-4 group-hover:scale-[1.02] transition-transform" />
                 <h3 className="text-white font-semibold">{c.title}</h3>
                 <p className="text-slate-300/80 text-sm mt-1">{c.desc}</p>
+                <motion.div
+                  className="absolute -inset-px rounded-2xl border border-emerald-400/0"
+                  whileHover={{ boxShadow: '0 0 0 1px rgba(52,211,153,0.35), 0 0 60px -20px rgba(52,211,153,0.45)' }}
+                />
               </div>
             </motion.div>
           ))}
